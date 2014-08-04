@@ -25,6 +25,7 @@ public:
 	void DestroyMsgListener();
 
 	int MsgLoop();
+	void Terminate();
 
 public:
 	const MSG* GetLastMsg()				{return &m_stLastMsg;}
@@ -36,7 +37,9 @@ public:
 	MUTABLE_PROPERTY_BASETYPE(HINSTANCE, m_hInstance, Instance);
 	MUTABLE_PROPERTY_BASETYPE(SRRenderWnd*, m_pRenderWnd, RenderWnd);
 	MUTABLE_PROPERTY_BASETYPE(HICON, m_hIcon, Icon);
-	MUTABLE_PROPERTY_BASETYPE(UINT, m_uFPS, FPS);
+	MUTABLE_PROPERTY_BASETYPE(UINT, m_uFPS, SettingFPS);
+	MUTABLE_PROPERTY_BASETYPE(bool, m_bTerminate, Terminate);
+	READONLY_PROPERTY_BASETYPE(float, m_fTimeDelta, TimeDelta);
 
 protected:
 	MessageListenerList m_xMessageListenerList;

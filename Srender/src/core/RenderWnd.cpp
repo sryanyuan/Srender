@@ -15,6 +15,7 @@ SRRenderWnd::SRRenderWnd()
 {
 	ZeroMemory(&m_rcWnd, sizeof(m_rcWnd));
 	m_hWnd = 0;
+	m_pD3Dev9 = NULL;
 }
 
 SRRenderWnd::~SRRenderWnd()
@@ -86,9 +87,92 @@ bool SRRenderWnd::Create(const char* _pszWndTitle, int _nWndWidth, int _nWndHeig
 		return false;
 	}
 
+	if(S_OK != InitD3D9())
+	{
+		return false;
+	}
+
 	SRRenderApp::GetInstancePtr()->SetRenderWnd(this);
 
 	return true;
+}
+
+HRESULT SRRenderWnd::InitD3D9()
+{
+	HRESULT hr = S_OK;
+
+	IDirect3D9* pD3D9 = Direct3DCreate9(D3D_SDK_VERSION);
+	if(NULL == pD3D9)
+	{
+		MSGBOX_ERR("Direct3DCreate9 failed");
+		return S_FALSE;
+	}
+
+	D3DCAPS9 caps;
+	pD3D9->GetDeviceCaps(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, &caps);
+
+	int nVertexProcessing = 0;
+	if(caps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT)
+	{
+		nVertexProcessing = D3DCREATE_HARDWARE_VERTEXPROCESSING;
+	}
+	else
+	{
+		nVertexProcessing = D3DCREATE_SOFTWARE_VERTEXPROCESSING;
+	}
+
+	D3DPRESENT_PARAMETERS ddpm;
+	ddpm.BackBufferWidth = m_rcWnd.right - m_rcWnd.left;
+	ddpm.BackBufferHeight = m_rcWnd.bottom - m_rcWnd.top;
+	ddpm.BackBufferFormat = D3DFMT_A8R8G8B8;
+	ddpm.BackBufferCount = 1;
+	ddpm.MultiSampleType = D3DMULTISAMPLE_NONE;
+	ddpm.MultiSampleQuality = 0;
+	ddpm.SwapEffect = D3DSWAPEFFECT_DISCARD;
+	ddpm.hDeviceWindow = m_hWnd;
+	ddpm.Windowed = TRUE;
+	ddpm.EnableAutoDepthStencil = TRUE;
+	ddpm.AutoDepthStencilFormat = D3DFMT_D24S8;
+	ddpm.Flags = 0;
+	ddpm.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
+	ddpm.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+
+	hr = pD3D9->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_hWnd, nVertexProcessing, &ddpm, &m_pD3Dev9);
+
+	do 
+	{
+		if(FAILED(hr))
+		{
+			ddpm.AutoDepthStencilFormat = D3DFMT_D16;
+
+			hr = pD3D9->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_hWnd, nVertexProcessing, &ddpm, &m_pD3Dev9);
+
+			if(FAILED(hr))
+			{
+				MSGBOX_ERR("IDirect3D9::CreateDevice failed");
+				break;
+			}
+		}
+	} while (0);
+
+	pD3D9->Release();
+	pD3D9 = NULL;
+
+	if(FAILED(hr))
+	{
+		return S_FALSE;
+	}
+
+	if(OnEnvCreate())
+	{
+		return S_OK;
+	}
+	return S_FALSE;
+}
+
+void SRRenderWnd::UnInitD3D9()
+{
+	SSAFE_RELEASE(m_pD3Dev9);
 }
 
 void SRRenderWnd::ShowWindow(bool bShow /* = true */)
@@ -118,8 +202,17 @@ bool SRRenderWnd::OnClose(LRESULT& _lRet)
 
 bool SRRenderWnd::OnDestroy(LRESULT& _lRet)
 {
+	OnEnvDestroy();
+	UnInitD3D9();
+
 	_lRet = 0;
 	m_hWnd = 0;
+
+	if(SRRenderApp::GetInstancePtr()->GetRenderWnd() == this)
+	{
+		SRRenderApp::GetInstancePtr()->SetRenderWnd(NULL);
+	}
+
 	PostQuitMessage(0);
 	return true;
 }

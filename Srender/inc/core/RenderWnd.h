@@ -25,8 +25,10 @@ public:
 	virtual bool OnClose(LRESULT& _lRet);
 	virtual bool OnDestroy(LRESULT& _lRet);
 
-	//	frame function
-	virtual void DrawFrame()	{}
+	//	user define function
+	virtual void OnDrawFrame()	{}
+	virtual bool OnEnvCreate()	{return true;}
+	virtual void OnEnvDestroy()	{}
 
 public:
 	inline bool IsWindow()
@@ -38,12 +40,25 @@ public:
 
 		return ::IsWindow(m_hWnd) == TRUE ? true : false;
 	}
+	inline IDirect3DDevice9* GetD3DDevice()
+	{
+		return m_pD3Dev9;
+	}
+
+public:
+	//	draw
+	int DrawQuad();
+
+protected:
+	HRESULT InitD3D9();
+	void UnInitD3D9();
 
 protected:
 	static LRESULT CALLBACK _WndProc(HWND _hWnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam);
 
 protected:
 	RECT m_rcWnd;
+	IDirect3DDevice9* m_pD3Dev9;
 
 	MUTABLE_PROPERTY_BASETYPE(HWND, m_hWnd, HWND);
 };

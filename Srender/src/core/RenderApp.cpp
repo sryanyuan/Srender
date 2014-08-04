@@ -11,6 +11,8 @@ SRRenderApp::SRRenderApp()
 	m_hIcon = NULL;
 	m_uFPS = 0;
 	ZeroMemory(&m_stLastMsg, sizeof(MSG));
+	m_fTimeDelta = 0.0f;
+	m_bTerminate = false;
 }
 
 SRRenderApp::~SRRenderApp()
@@ -83,7 +85,7 @@ int SRRenderApp::MsgLoop()
 	msg.message = WM_NULL;
 	PeekMessage( &msg, NULL, 0U, 0U, PM_NOREMOVE );
 
-	UINT uFPS = GetFPS();
+	UINT uFPS = GetSettingFPS();
 	if(0 == uFPS)
 	{
 		uFPS = 30;
@@ -112,17 +114,33 @@ int SRRenderApp::MsgLoop()
 		else
 		{
 			// Render a frame during idle time (no messages are waiting)
-			GetRenderWnd()->DrawFrame();
-		}
+			DWORD dwCurrentTick = GetTickCount();
 
-		DWORD dwCurrentTick = GetTickCount();
-		if(dwCurrentTick - s_dwLastFrameTime < s_dwFPSGap)
-		{
-			Sleep(s_dwFPSGap - (dwCurrentTick - s_dwLastFrameTime));
-		}
+			DWORD dwTimeDelta = dwCurrentTick - s_dwLastFrameTime;
+			m_fTimeDelta = (float)(dwCurrentTick - s_dwLastFrameTime) * 0.001f;
+			
+			GetRenderWnd()->OnDrawFrame();
 
-		s_dwLastFrameTime = GetTickCount();
+			s_dwLastFrameTime = dwCurrentTick;
+
+			DWORD dwCurrentTickAfterFrame = GetTickCount();
+			DWORD dwTickDuringFrame = dwCurrentTickAfterFrame - dwCurrentTick;
+
+			if(dwTickDuringFrame < s_dwFPSGap)
+			{
+				Sleep(s_dwFPSGap - dwTickDuringFrame);
+			}
+		}
 	}
 
 	return (int)msg.wParam;
+}
+
+void SRRenderApp::Terminate()
+{
+	SRRenderWnd* pRenderWnd = GetRenderWnd();
+	if(pRenderWnd)
+	{
+		::DestroyWindow(pRenderWnd->GetHWND());
+	}
 }
