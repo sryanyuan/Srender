@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "frametest.h"
+#include "MyRenderWnd.h"
 
 #include <core/RenderWnd.h>
 #include <core/RenderApp.h>
@@ -21,14 +22,17 @@ BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
 
-class MyListener : public SIMessageListener
+class CMyListener : public SIMessageListener
 {
 public:
-	virtual bool OnMessage(HWND _hWnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam)	{return false;}
-
-	virtual int Test(){return 1;}
-
-	int a;
+	virtual bool OnMessage(HWND _hWnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam)
+	{
+		if(_uMsg == WM_LBUTTONDOWN)
+		{
+			SRRenderApp::GetInstancePtr()->Terminate();
+		}
+		return false;
+	}
 };
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
@@ -40,36 +44,10 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
  	// TODO: 在此放置代码。
-	/*MSG msg;
-	HACCEL hAccelTable;
-
-	// 初始化全局字符串
-	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-	LoadString(hInstance, IDC_FRAMETEST, szWindowClass, MAX_LOADSTRING);
-	MyRegisterClass(hInstance);
-
-	// 执行应用程序初始化:
-	if (!InitInstance (hInstance, nCmdShow))
-	{
-		return FALSE;
-	}
-
-	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_FRAMETEST));
-
-	// 主消息循环:
-	while (GetMessage(&msg, NULL, 0, 0))
-	{
-		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-	}
-
-	return (int) msg.wParam;*/
 	SRRenderApp::GetInstancePtr()->SetInstance(hInstance);
+	SRRenderApp::GetInstancePtr()->AddMsgListener(new CMyListener);
 
-	SRRenderWnd wnd;
+	CMyRenderWnd wnd;
 	if(!wnd.Create("Frame test", 800, 600))
 	{
 		return -1;

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\Srender\inc"
+				AdditionalIncludeDirectories="..\..\..\Srender\inc;&quot;$(DXSDK_DIR)\Include\&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,7 +63,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="Srender_SD.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\Srender\Debug\"
+				AdditionalLibraryDirectories="..\..\..\Srender\Debug\;&quot;$(DXSDK_DIR)\Lib\x86&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -178,6 +178,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MyRenderWnd.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -205,6 +209,10 @@
 			>
 			<File
 				RelativePath=".\frametest.h"
+				>
+			</File>
+			<File
+				RelativePath=".\MyRenderWnd.h"
 				>
 			</File>
 			<File
