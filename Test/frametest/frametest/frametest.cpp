@@ -21,7 +21,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
  	// TODO: 在此放置代码。
-	//return CubeWnd::AppMain(hInstance);
+	return CubeWnd::AppMain(hInstance);
 
-	return TriangleWnd::AppMain(hInstance);
+	//return TriangleWnd::AppMain(hInstance);
 }

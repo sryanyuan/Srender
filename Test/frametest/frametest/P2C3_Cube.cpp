@@ -44,7 +44,7 @@ void CubeWnd::OnDrawFrame()
 
 	D3DXMATRIX rt;
 	rt = rx * ry;
-	//m_pD3Dev9->SetTransform(D3DTS_WORLD, &ry);
+	m_pD3Dev9->SetTransform(D3DTS_WORLD, &rt);
 
 	//	draw
 	m_pD3Dev9->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xffffffff, 1.0f, 0);
@@ -54,8 +54,7 @@ void CubeWnd::OnDrawFrame()
 	m_pD3Dev9->SetIndices(m_pIndexBuf);
 	m_pD3Dev9->SetFVF(SRVertex::FVF);
 
-	//m_pD3Dev9->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
-	m_pD3Dev9->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 3, 0, 1);
+	m_pD3Dev9->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 8, 0, 12);
 
 	m_pD3Dev9->EndScene();
 	m_pD3Dev9->Present(0, 0, 0, 0);
@@ -77,16 +76,16 @@ bool CubeWnd::OnEnvCreate()
 	m_pVertexBuf->Lock(0, 0, (void**)&pVertex, 0);
 
 	//	z = -1
-	pVertex[0].SetXYZ(-1.0f, -1.0f, -1.0f);
-	pVertex[1].SetXYZ(-1.0f, 1.0f, -1.0f);
-	pVertex[2].SetXYZ(1.0f, 1.0f, -1.0f);
-	pVertex[3].SetXYZ(1.0f, -1.0f, -1.0f);
+	pVertex[0] = SRVertex(-1.0f, -1.0f, -1.0f);
+	pVertex[1] = SRVertex(-1.0f, 1.0f, -1.0f);
+	pVertex[2] = SRVertex(1.0f, 1.0f, -1.0f);
+	pVertex[3] = SRVertex(1.0f, -1.0f, -1.0f);
 
 	//	z = 1
-	pVertex[4].SetXYZ(-1.0f, -1.0f, 1.0f);
-	pVertex[5].SetXYZ(-1.0f, 1.0f, 1.0f);
-	pVertex[6].SetXYZ(1.0f, 1.0f, 1.0f);
-	pVertex[7].SetXYZ(1.0f, -1.0f, 1.0f);
+	pVertex[4] = SRVertex(-1.0f, -1.0f, 1.0f);
+	pVertex[5] = SRVertex(-1.0f, 1.0f, 1.0f);
+	pVertex[6] = SRVertex(1.0f, 1.0f, 1.0f);
+	pVertex[7] = SRVertex(1.0f, -1.0f, 1.0f);
 
 	m_pVertexBuf->Unlock();
 

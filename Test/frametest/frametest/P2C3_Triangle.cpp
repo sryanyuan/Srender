@@ -29,6 +29,10 @@ bool TriangleWnd::OnEnvCreate()
 	pVertex[1].SetXYZ(0, 1, 2);
 	pVertex[2].SetXYZ(1, 0, 2);
 
+	pVertex[0] = SRVertex(-1, 0, 2);
+	pVertex[1] = SRVertex(0, 1, 2);
+	pVertex[2] = SRVertex(1, 0, 2);
+
 	m_pVertexBuf->Unlock();
 
 	Gfx_SetProjectionTransform();
