@@ -40,6 +40,7 @@ public:
 	MUTABLE_PROPERTY_BASETYPE(UINT, m_uFPS, SettingFPS);
 	MUTABLE_PROPERTY_BASETYPE(bool, m_bTerminate, Terminate);
 	READONLY_PROPERTY_BASETYPE(float, m_fTimeDelta, TimeDelta);
+	READONLY_PROPERTY_BASETYPE(int, m_nFPS, FPS);
 
 protected:
 	MessageListenerList m_xMessageListenerList;

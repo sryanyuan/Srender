@@ -4,6 +4,7 @@
 #include "SrenderDef.h"
 #include <windows.h>
 #include "SRObject.h"
+#include "SRVertex.h"
 //////////////////////////////////////////////////////////////////////////
 class SRENDER_API SRRenderWnd : public SRObject
 {
@@ -15,8 +16,16 @@ public:
 	virtual ~SRRenderWnd();
 
 public:
+	//	window relative
 	bool Create(const char* _pszWndTitle, int _nWndWidth, int _nWndHeight);
 	void ShowWindow(bool bShow = true);
+
+	//	d3d relative
+	IDirect3DVertexBuffer9* Gfx_CreateVertexBuffer(DWORD _dwVertexSum, DWORD _dwUsage = D3DUSAGE_WRITEONLY, D3DPOOL _ePool = D3DPOOL_MANAGED);
+	IDirect3DIndexBuffer9* Gfx_CreateIndexBuffer(DWORD _dwIndexSum, DWORD _dwUsage = D3DUSAGE_WRITEONLY, D3DPOOL _ePool = D3DPOOL_MANAGED, D3DFORMAT _eFormat = D3DFMT_INDEX16);
+
+	bool Gfx_SetViewTransform(const D3DXVECTOR3* _pPosition = NULL, const D3DXVECTOR3* _pTarget = NULL, const D3DXVECTOR3* _pUp = NULL);
+	bool Gfx_SetProjectionTransform(float _fFovy = D3DX_PI * 0.5f, float _fZn = 1.0f, float _fZf = 1000.0f);
 
 public:
 	//	event processor

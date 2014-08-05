@@ -183,6 +183,10 @@
 					RelativePath="..\inc\core\SRObject.h"
 					>
 				</File>
+				<File
+					RelativePath="..\inc\core\SRVertex.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="util"
@@ -205,6 +209,10 @@
 				</File>
 				<File
 					RelativePath="..\src\core\RenderWnd.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\core\SRVertex.cpp"
 					>
 				</File>
 			</Filter>

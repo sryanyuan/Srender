@@ -13,6 +13,7 @@ SRRenderApp::SRRenderApp()
 	ZeroMemory(&m_stLastMsg, sizeof(MSG));
 	m_fTimeDelta = 0.0f;
 	m_bTerminate = false;
+	m_nFPS = 0;
 }
 
 SRRenderApp::~SRRenderApp()
@@ -120,6 +121,19 @@ int SRRenderApp::MsgLoop()
 			m_fTimeDelta = (float)(dwCurrentTick - s_dwLastFrameTime) * 0.001f;
 			
 			GetRenderWnd()->OnDrawFrame();
+
+			//	calculate fps
+			static DWORD s_dwFpsCountTime = GetTickCount();
+			static int s_nFpsCache = 0;
+
+			++s_nFpsCache;
+			if(GetTickCount() - s_dwFpsCountTime >= 1000)
+			{
+				m_nFPS = s_nFpsCache;
+				s_nFpsCache = 0;
+				s_dwFpsCountTime = GetTickCount();
+			}
+			//////////////////////////////////////////////////////////////////////////
 
 			s_dwLastFrameTime = dwCurrentTick;
 

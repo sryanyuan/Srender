@@ -217,6 +217,115 @@ bool SRRenderWnd::OnDestroy(LRESULT& _lRet)
 	return true;
 }
 
+IDirect3DVertexBuffer9* SRRenderWnd::Gfx_CreateVertexBuffer(DWORD _dwVertexSum, DWORD _dwUsage /* = D3DUSAGE_WRITEONLY */, D3DPOOL _ePool /* = D3DPOOL_MANAGED */)
+{
+	if(NULL == m_pD3Dev9)
+	{
+		return false;
+	}
+	
+	IDirect3DVertexBuffer9* pVertexBuf = NULL;
+
+	HRESULT hr = m_pD3Dev9->CreateVertexBuffer(sizeof(SRVertex) * _dwVertexSum,
+		_dwUsage,
+		SRVertex::FVF,
+		_ePool,
+		&pVertexBuf,
+		NULL);
+
+	if(D3D_OK == hr)
+	{
+		return pVertexBuf;
+	}
+
+	return NULL;
+}
+
+IDirect3DIndexBuffer9* SRRenderWnd::Gfx_CreateIndexBuffer(DWORD _dwIndexSum, DWORD _dwUsage /* = D3DUSAGE_WRITEONLY */, D3DPOOL _ePool /* = D3DPOOL_MANAGED */, D3DFORMAT _eFormat /* = D3DFMT_INDEX16 */)
+{
+	if(NULL == m_pD3Dev9)
+	{
+		return false;
+	}
+	
+	IDirect3DIndexBuffer9* pIndexBuf = NULL;
+
+	UINT uLength = sizeof(WORD);
+	if(D3DFMT_INDEX32 == _eFormat)
+	{
+		uLength = sizeof(DWORD);
+	}
+
+	HRESULT hr = m_pD3Dev9->CreateIndexBuffer(_dwIndexSum * uLength,
+		_dwUsage,
+		_eFormat,
+		_ePool,
+		&pIndexBuf,
+		NULL);
+
+	if(D3D_OK == hr)
+	{
+		return pIndexBuf;
+	}
+
+	return NULL;
+}
+
+bool SRRenderWnd::Gfx_SetViewTransform(const D3DXVECTOR3* _pPosition /* = NULL */, const D3DXVECTOR3* _pTarget /* = NULL */, const D3DXVECTOR3* _pUp /* = NULL */)
+{
+	if(NULL == m_pD3Dev9)
+	{
+		return false;
+	}
+
+	D3DXVECTOR3 pos(0.0f, 0.0f, -5.0f);
+	D3DXVECTOR3 target(0.0f, 0.0f, 0.0f);
+	D3DXVECTOR3 up(0.0f, 1.0f, 0.0f);
+
+	if(NULL != _pPosition)
+	{
+		pos = *_pPosition;
+	}
+	if(NULL != _pTarget)
+	{
+		target = *_pTarget;
+	}
+	if(NULL != _pUp)
+	{
+		up = *_pUp;
+	}
+
+	D3DXMATRIX trans;
+	D3DXMatrixLookAtLH(&trans, &pos, &target, &up);
+
+	HRESULT hr = m_pD3Dev9->SetTransform(D3DTS_VIEW, &trans);
+
+	if(D3D_OK == hr)
+	{
+		return true;
+	}
+	return false;
+}
+
+bool SRRenderWnd::Gfx_SetProjectionTransform(float _fFovy /* = D3DX_PI * 0.5f */, float _fZn /* = 1.0f */, float _fZf /* = 1000.0f */)
+{
+	float fAspect = float(m_rcWnd.right - m_rcWnd.left) / float(m_rcWnd.bottom - m_rcWnd.top);
+	D3DXMATRIX proj;
+
+	D3DXMatrixPerspectiveFovLH(&proj,
+		_fFovy,
+		fAspect,
+		_fZn,
+		_fZf);
+
+	HRESULT hr = m_pD3Dev9->SetTransform(D3DTS_PROJECTION, &proj);
+
+	if(D3D_OK == hr)
+	{
+		return true;
+	}
+	return false;
+}
 //////////////////////////////////////////////////////////////////////////
 //	static
 LRESULT SRRenderWnd::_WndProc(HWND _hWnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam)
