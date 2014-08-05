@@ -208,6 +208,10 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\AppTemplate.h"
+				>
+			</File>
+			<File
 				RelativePath=".\frametest.h"
 				>
 			</File>
@@ -243,6 +247,26 @@
 			</File>
 			<File
 				RelativePath=".\small.ico"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Part2"
+			>
+			<File
+				RelativePath=".\P2C3_Cube.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\P2C3_Cube.h"
+				>
+			</File>
+			<File
+				RelativePath=".\P2C3_Triangle.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\P2C3_Triangle.h"
 				>
 			</File>
 		</Filter>
