@@ -4,12 +4,12 @@
 #include <core/RenderApp.h>
 //////////////////////////////////////////////////////////////////////////
 template <typename T>
-int AppTemplate_Main(HINSTANCE _hInstance)
+int AppTemplate_Main(HINSTANCE _hInstance, const char* _pszAppName = "", int _nWndWidth = 800, int _nWndHeight = 600)
 {
 	SRRenderApp::GetInstancePtr()->SetInstance(_hInstance);
 
 	T wnd;
-	if(!wnd.Create("P3C3_Cube", 800, 600))
+	if(!wnd.Create(_pszAppName, _nWndWidth, _nWndHeight))
 	{
 		return -1;
 	}
