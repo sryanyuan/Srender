@@ -9,7 +9,7 @@ SRRenderApp::SRRenderApp()
 	m_hInstance = 0;
 	m_pRenderWnd = NULL;
 	m_hIcon = NULL;
-	m_uFPS = 0;
+	m_uSettingFPS = 0;
 	ZeroMemory(&m_stLastMsg, sizeof(MSG));
 	m_fTimeDelta = 0.0f;
 	m_bTerminate = false;

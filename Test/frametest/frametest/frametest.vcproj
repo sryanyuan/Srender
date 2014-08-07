@@ -254,6 +254,10 @@
 			Name="Part2"
 			>
 			<File
+				RelativePath=".\LitPyramid.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\P2C3_Cube.cpp"
 				>
 			</File>
@@ -267,6 +271,18 @@
 			</File>
 			<File
 				RelativePath=".\P2C3_Triangle.h"
+				>
+			</File>
+			<File
+				RelativePath=".\P2C4_ColorTriangle.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\P2C4_ColorTriangle.h"
+				>
+			</File>
+			<File
+				RelativePath=".\P2C5_LitPyramid.h"
 				>
 			</File>
 		</Filter>

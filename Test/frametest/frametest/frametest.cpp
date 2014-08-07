@@ -11,6 +11,8 @@
 #include "MyRenderWnd.h"
 #include "P2C3_Cube.h"
 #include "P2C3_Triangle.h"
+#include "P2C4_ColorTriangle.h"
+#include "P2C5_LitPyramid.h"
 //////////////////////////////////////////////////////////////////////////
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -19,9 +21,13 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 {
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	UNREFERENCED_PARAMETER(lpCmdLine);
-
+	//////////////////////////////////////////////////////////////////////////
  	// TODO: 在此放置代码。
-	return CubeWnd::AppMain(hInstance);
+	//return CubeWnd::AppMain(hInstance);
 
 	//return TriangleWnd::AppMain(hInstance);
+
+	//return ColorTriangleWnd::AppMain(hInstance);
+
+	return LitPyramid::AppMain(hInstance);
 }

@@ -217,7 +217,8 @@ bool SRRenderWnd::OnDestroy(LRESULT& _lRet)
 	return true;
 }
 
-IDirect3DVertexBuffer9* SRRenderWnd::Gfx_CreateVertexBuffer(DWORD _dwVertexSum, DWORD _dwUsage /* = D3DUSAGE_WRITEONLY */, D3DPOOL _ePool /* = D3DPOOL_MANAGED */)
+//IDirect3DVertexBuffer9* SRRenderWnd::Gfx_CreateVertexBuffer(DWORD _dwVertexSum, DWORD _dwUsage /* = D3DUSAGE_WRITEONLY */, D3DPOOL _ePool /* = D3DPOOL_MANAGED */)
+/*
 {
 	if(NULL == m_pD3Dev9)
 	{
@@ -239,7 +240,7 @@ IDirect3DVertexBuffer9* SRRenderWnd::Gfx_CreateVertexBuffer(DWORD _dwVertexSum, 
 	}
 
 	return NULL;
-}
+}*/
 
 IDirect3DIndexBuffer9* SRRenderWnd::Gfx_CreateIndexBuffer(DWORD _dwIndexSum, DWORD _dwUsage /* = D3DUSAGE_WRITEONLY */, D3DPOOL _ePool /* = D3DPOOL_MANAGED */, D3DFORMAT _eFormat /* = D3DFMT_INDEX16 */)
 {

@@ -62,7 +62,7 @@ void CubeWnd::OnDrawFrame()
 
 bool CubeWnd::OnEnvCreate()
 {
-	m_pVertexBuf = Gfx_CreateVertexBuffer(8);
+	m_pVertexBuf = Gfx_CreateVertexBuffer<SRVertex>(8);
 	m_pIndexBuf = Gfx_CreateIndexBuffer(36);
 
 	if(NULL == m_pVertexBuf ||

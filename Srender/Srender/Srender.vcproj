@@ -176,6 +176,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\inc\core\SRColor.h"
+					>
+				</File>
+				<File
 					RelativePath="..\inc\core\SrenderDef.h"
 					>
 				</File>

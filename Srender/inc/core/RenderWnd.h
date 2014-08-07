@@ -21,7 +21,31 @@ public:
 	void ShowWindow(bool bShow = true);
 
 	//	d3d relative
-	IDirect3DVertexBuffer9* Gfx_CreateVertexBuffer(DWORD _dwVertexSum, DWORD _dwUsage = D3DUSAGE_WRITEONLY, D3DPOOL _ePool = D3DPOOL_MANAGED);
+	template <typename T>
+	IDirect3DVertexBuffer9* Gfx_CreateVertexBuffer(DWORD _dwVertexSum, DWORD _dwUsage = D3DUSAGE_WRITEONLY, D3DPOOL _ePool = D3DPOOL_MANAGED)
+	{
+		if(NULL == m_pD3Dev9)
+		{
+			return false;
+		}
+
+		IDirect3DVertexBuffer9* pVertexBuf = NULL;
+
+		HRESULT hr = m_pD3Dev9->CreateVertexBuffer(sizeof(T) * _dwVertexSum,
+			_dwUsage,
+			T::FVF,
+			_ePool,
+			&pVertexBuf,
+			NULL);
+
+		if(D3D_OK == hr)
+		{
+			return pVertexBuf;
+		}
+
+		return NULL;
+	}
+
 	IDirect3DIndexBuffer9* Gfx_CreateIndexBuffer(DWORD _dwIndexSum, DWORD _dwUsage = D3DUSAGE_WRITEONLY, D3DPOOL _ePool = D3DPOOL_MANAGED, D3DFORMAT _eFormat = D3DFMT_INDEX16);
 
 	bool Gfx_SetViewTransform(const D3DXVECTOR3* _pPosition = NULL, const D3DXVECTOR3* _pTarget = NULL, const D3DXVECTOR3* _pUp = NULL);
@@ -52,6 +76,14 @@ public:
 	inline IDirect3DDevice9* GetD3DDevice()
 	{
 		return m_pD3Dev9;
+	}
+	inline int GetWindowWidth()
+	{
+		return m_rcWnd.right - m_rcWnd.left;
+	}
+	inline int GetWindowHeight()
+	{
+		return m_rcWnd.bottom - m_rcWnd.top;
 	}
 
 public:

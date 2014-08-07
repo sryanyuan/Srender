@@ -20,7 +20,7 @@ TriangleWnd::~TriangleWnd()
 
 bool TriangleWnd::OnEnvCreate()
 {
-	m_pVertexBuf = Gfx_CreateVertexBuffer(3);
+	m_pVertexBuf = Gfx_CreateVertexBuffer<SRVertex>(3);
 
 	SRVertex* pVertex = NULL;
 	m_pVertexBuf->Lock(0, 0, (void**)&pVertex, 0);

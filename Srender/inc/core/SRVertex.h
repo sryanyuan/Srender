@@ -8,6 +8,7 @@ struct SRVertex
 	SRVertex()
 	{
 		m_fVertexX = m_fVertexY = m_fVertexZ = 0.0f;
+		//m_dwColor = 0;
 	}
 	SRVertex(float _x, float _y, float _z)
 	{
@@ -15,6 +16,13 @@ struct SRVertex
 		SetY(_y);
 		SetZ(_z);
 	}
+	/*SRVertex(float _x, float _y, float _z, DWORD _dwColor)
+	{
+		SetX(_x);
+		SetY(_y);
+		SetZ(_z);
+		m_dwColor = _dwColor;
+	}*/
 
 	float GetX()
 	{
@@ -31,7 +39,7 @@ struct SRVertex
 
 	void SetXYZ(float _x, float _y, float _z)
 	{
-		SetZ(_x);
+		SetX(_x);
 		SetY(_y);
 		SetZ(_z);
 	}
@@ -49,8 +57,66 @@ struct SRVertex
 	}
 
 	//////////////////////////////////////////////////////////////////////////
+	//	coordinate
 	float m_fVertexX, m_fVertexY, m_fVertexZ;
+	//	color
+	//D3DCOLOR m_dwColor;
 	//////////////////////////////////////////////////////////////////////////
+	//	flexible vertex
+	static const DWORD FVF;
+};
+
+//////////////////////////////////////////////////////////////////////////
+struct SRColorVertex : public SRVertex
+{
+	SRColorVertex()
+	{
+		m_dwColor = 0;
+	}
+	SRColorVertex(float _x, float _y, float _z, D3DCOLOR _dwColor) : SRVertex(_x, _y, _z)
+	{
+		m_dwColor = _dwColor;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	//	color
+	D3DCOLOR m_dwColor;
+	//////////////////////////////////////////////////////////////////////////
+	//	fvf
+	static const DWORD FVF;
+};
+
+//////////////////////////////////////////////////////////////////////////
+struct SRNormalVertex : public SRVertex
+{
+	SRNormalVertex()
+	{
+		m_fNormalX = m_fNormalY = m_fNormalZ = 0.0f;
+	}
+	SRNormalVertex(float _x, float _y, float _z)
+	{
+		SetXYZ(_x, _y, _z);
+	}
+	SRNormalVertex(float _x, float _y, float _z, float _nx, float _ny, float _nz)
+	{
+		SetXYZ(_x, _y, _z);
+
+		m_fNormalX = _nx;
+		m_fNormalY = _ny;
+		m_fNormalZ = _nz;
+	}
+
+	void SetNormalXYZ(float _nx, float _ny, float _nz)
+	{
+		m_fNormalX = _nx;
+		m_fNormalY = _ny;
+		m_fNormalZ = _nz;
+	}
+	//////////////////////////////////////////////////////////////////////////
+	//	vertex normal
+	float m_fNormalX, m_fNormalY, m_fNormalZ;
+	//////////////////////////////////////////////////////////////////////////
+	//	fvf
 	static const DWORD FVF;
 };
 //////////////////////////////////////////////////////////////////////////
