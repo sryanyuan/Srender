@@ -13,6 +13,8 @@
 #include "P2C3_Triangle.h"
 #include "P2C4_ColorTriangle.h"
 #include "P2C5_LitPyramid.h"
+#include "P2C6_TexQuad.h"
+#include "P2C6_TexCube.h"
 //////////////////////////////////////////////////////////////////////////
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -29,5 +31,9 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 	//return ColorTriangleWnd::AppMain(hInstance);
 
-	return LitPyramid::AppMain(hInstance);
+	//return LitPyramid::AppMain(hInstance);
+
+	//return TexQuadWnd::AppMain(hInstance);
+
+	return TexCubeWnd::AppMain(hInstance);
 }

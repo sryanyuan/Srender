@@ -119,5 +119,45 @@ struct SRNormalVertex : public SRVertex
 	//	fvf
 	static const DWORD FVF;
 };
+
+//////////////////////////////////////////////////////////////////////////
+struct SRNormalTextureVertex : public SRNormalVertex
+{
+	SRNormalTextureVertex()
+	{
+		m_fTextureX = m_fTextureY = 0.0f;
+	}
+
+	SRNormalTextureVertex(float _x, float _y, float _z)
+	{
+		SetXYZ(_x, _y, _z);
+
+		m_fTextureX = m_fTextureY = 0.0f;
+	}
+
+	SRNormalTextureVertex(float _x, float _y, float _z, float _nx, float _ny, float _nz) : SRNormalVertex(_x, _y, _z, _nx, _ny, _nz)
+	{
+		m_fTextureX = m_fTextureY = 0.0f;
+	}
+
+	void SetTextureXY(float _tx, float _ty)
+	{
+		m_fTextureX = _tx;
+		m_fTextureY = _ty;
+	}
+
+	SRNormalTextureVertex(float _x, float _y, float _z, float _nx, float _ny, float _nz, float _tx, float _ty) : SRNormalVertex(_x, _y, _z, _nx, _ny, _nz)
+	{
+		m_fTextureX = _tx;
+		m_fTextureY = _ty;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	//	texture coordinates
+	float m_fTextureX, m_fTextureY;
+	//////////////////////////////////////////////////////////////////////////
+	//	fvf
+	static const DWORD FVF;
+};
 //////////////////////////////////////////////////////////////////////////
 #endif

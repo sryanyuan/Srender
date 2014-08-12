@@ -285,6 +285,22 @@
 				RelativePath=".\P2C5_LitPyramid.h"
 				>
 			</File>
+			<File
+				RelativePath=".\P2C6_TexCube.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\P2C6_TexCube.h"
+				>
+			</File>
+			<File
+				RelativePath=".\P2C6_TexQuad.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\P2C6_TexQuad.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"
