@@ -1,6 +1,9 @@
 #include <core/RenderApp.h>
 #include <core/RenderWnd.h>
 #include <algorithm>
+#include <Shlwapi.h>
+//////////////////////////////////////////////////////////////////////////
+#pragma comment(lib, "shlwapi.lib")
 //////////////////////////////////////////////////////////////////////////
 SRRUNTIME_IMPLEMENT(SRRenderApp, SRObject, SRCLSNAME_SRRENDERAPP)
 
@@ -157,4 +160,17 @@ void SRRenderApp::Terminate()
 	{
 		::DestroyWindow(pRenderWnd->GetHWND());
 	}
+}
+
+const char* SRRenderApp::GetWorkingDir()
+{
+	static char s_szWorkingDir[MAX_PATH] = {0};
+
+	if(0 == s_szWorkingDir[0])
+	{
+		GetModuleFileName(NULL, s_szWorkingDir, sizeof(s_szWorkingDir));
+		PathRemoveFileSpec(s_szWorkingDir);
+	}
+
+	return s_szWorkingDir;
 }

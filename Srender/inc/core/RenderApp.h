@@ -29,6 +29,7 @@ public:
 
 public:
 	const MSG* GetLastMsg()				{return &m_stLastMsg;}
+	const char* GetWorkingDir();
 
 protected:
 	bool QueryMessageListener(HWND _hWnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam);
