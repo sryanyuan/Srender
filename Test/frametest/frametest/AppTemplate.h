@@ -18,5 +18,15 @@ int AppTemplate_Main(HINSTANCE _hInstance, const char* _pszAppName = "", int _nW
 
 	return SRRenderApp::GetInstancePtr()->MsgLoop();
 }
+
+template <typename T>
+class AppMainEntry
+{
+public:
+	static int AppMain(HINSTANCE _hInstance, const char* _pszAppName = "", int _nWndWidth = 800, int _nWndHeight = 600)
+	{
+		return AppTemplate_Main<T>(_hInstance, _pszAppName, _nWndWidth, _nWndHeight);
+	}
+};
 //////////////////////////////////////////////////////////////////////////
 #endif

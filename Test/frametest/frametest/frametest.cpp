@@ -15,6 +15,7 @@
 #include "P2C5_LitPyramid.h"
 #include "P2C6_TexQuad.h"
 #include "P2C6_TexCube.h"
+#include "P2C7_MaterialAlpha.h"
 //////////////////////////////////////////////////////////////////////////
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -35,5 +36,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 	//return TexQuadWnd::AppMain(hInstance);
 
-	return TexCubeWnd::AppMain(hInstance);
+	//return TexCubeWnd::AppMain(hInstance);
+
+	return MaterialAlphaWnd::AppMain(hInstance);
 }
