@@ -50,6 +50,9 @@ public:
 
 	bool Gfx_SetViewTransform(const D3DXVECTOR3* _pPosition = NULL, const D3DXVECTOR3* _pTarget = NULL, const D3DXVECTOR3* _pUp = NULL);
 	bool Gfx_SetProjectionTransform(float _fFovy = D3DX_PI * 0.5f, float _fZn = 1.0f, float _fZf = 1000.0f);
+	void Gfx_SetSamplerFilter(DWORD _dwMagFilter = D3DTEXF_LINEAR, DWORD _dwMinFilter = D3DTEXF_LINEAR, DWORD _dwMipFilter = D3DTEXF_POINT);
+
+	bool Input_IsKeyPressed(int _nVK);
 
 public:
 	//	event processor

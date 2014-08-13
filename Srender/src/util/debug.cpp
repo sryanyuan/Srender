@@ -1,4 +1,6 @@
 #include <util/debug.h>
+#include <stdarg.h>
+#include <stdio.h>
 //////////////////////////////////////////////////////////////////////////
 LPSTR FormatErrorCode(DWORD _dwErrorCode)
 {  
@@ -17,4 +19,20 @@ void ShowErrorCodeMsgBox(DWORD _dwErrorCode)
 		MSGBOX_ERR(pszErrorMsg);
 	}
 	//SSAFE_DELETE_ARRAPY(pszErrorMsg);
+}
+
+void SRTrace(const char* _pszFormat, ...)
+{
+#ifdef _DEBUG
+	char szMsg[4096] = {0};
+
+	va_list ap;
+
+	va_start(ap, _pszFormat);
+	vsprintf(szMsg, _pszFormat, ap);
+	va_end(ap);
+
+	strcat(szMsg, "\n");
+	printf(szMsg);
+#endif
 }

@@ -17,6 +17,11 @@
 #define SRLOG_WARNING		LOG(WARNING)
 #define SRLOG_ERROR			LOG(ERROR)
 #define SRLOG_FATAL			LOG(FATAL)
+
+#define SRLOGD_INFO			DLOG(INFO)
+#define SRLOGD_WARNING		DLOG(WARNING)
+#define SRLOGD_ERROR		DLOG(ERROR)
+#define SRLOGD_FATAL		DLOG(FATAL)
 //////////////////////////////////////////////////////////////////////////
 class SRENDER_API SRLogger
 {

@@ -27,7 +27,6 @@ public:
 	int MsgLoop();
 	void Terminate();
 
-public:
 	const MSG* GetLastMsg()				{return &m_stLastMsg;}
 	const char* GetWorkingDir();
 

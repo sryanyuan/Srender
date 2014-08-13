@@ -336,6 +336,26 @@ bool SRRenderWnd::Gfx_SetProjectionTransform(float _fFovy /* = D3DX_PI * 0.5f */
 	}
 	return false;
 }
+
+void SRRenderWnd::Gfx_SetSamplerFilter(DWORD _dwMagFilter /* = D3DTEXF_LINEAR */, DWORD _dwMinFilter /* = D3DTEXF_LINEAR */, DWORD _dwMipFilter /* = D3DTEXF_POINT */)
+{
+	if(m_pD3Dev9)
+	{
+		m_pD3Dev9->SetSamplerState(0, D3DSAMP_MAGFILTER, _dwMagFilter);
+		m_pD3Dev9->SetSamplerState(0, D3DSAMP_MINFILTER, _dwMinFilter);
+		m_pD3Dev9->SetSamplerState(0, D3DSAMP_MIPFILTER, _dwMipFilter);
+	}
+}
+
+bool SRRenderWnd::Input_IsKeyPressed(int _nVK)
+{
+	if(GetAsyncKeyState(_nVK) & 0x8000)
+	{
+		return true;
+	}
+
+	return false;
+}
 //////////////////////////////////////////////////////////////////////////
 //	static
 LRESULT SRRenderWnd::_WndProc(HWND _hWnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam)

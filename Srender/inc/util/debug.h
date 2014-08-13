@@ -7,5 +7,7 @@
 LPSTR FormatErrorCode(DWORD _dwErrorCode);
 
 void ShowErrorCodeMsgBox(DWORD _dwErrorCode);
+
+void SRTrace(const char* _pszFormat, ...);
 //////////////////////////////////////////////////////////////////////////
 #endif

@@ -24,12 +24,24 @@ SRRenderApp::SRRenderApp()
 	strcpy(szLogDestination, GetWorkingDir());
 	strcat(szLogDestination, "\\log\\");
 	SRLogger::GetInstancePtr()->Initialize(szLogDestination);
+
+	//	allocate console
+#ifdef _DEBUG
+	AllocConsole();
+	SetConsoleTitle("SRender debug console");
+	freopen("CONIN$", "r+t", stdin);
+	freopen("CONOUT$", "w+t", stdout);
+#endif
 }
 
 SRRenderApp::~SRRenderApp()
 {
 	DestroyMsgListener();
 	SRLogger::GetInstancePtr()->UnInitialize();
+
+#ifdef _DEBUG
+	FreeConsole();
+#endif
 }
 
 
