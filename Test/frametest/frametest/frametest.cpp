@@ -4,9 +4,9 @@
 #include "stdafx.h"
 #include "frametest.h"
 
-#include <core/RenderWnd.h>
-#include <core/RenderApp.h>
-#include <core/MessageListener.h>
+#include <core/SRRenderWnd.h>
+#include <core/SRRenderApp.h>
+#include <core/SIMessageListener.h>
 
 #include "MyRenderWnd.h"
 #include "P2C3_Cube.h"

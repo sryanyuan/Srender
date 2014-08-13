@@ -1,7 +1,7 @@
 #ifndef _INC_APPTEMPLATE_
 #define _INC_APPTEMPLATE_
 //////////////////////////////////////////////////////////////////////////
-#include <core/RenderApp.h>
+#include <core/SRRenderApp.h>
 //////////////////////////////////////////////////////////////////////////
 template <typename T>
 int AppTemplate_Main(HINSTANCE _hInstance, const char* _pszAppName = "", int _nWndWidth = 800, int _nWndHeight = 600)

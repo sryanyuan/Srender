@@ -27,7 +27,7 @@ bool MaterialAlphaWnd::OnEnvCreate()
 	SetWindowText(GetHWND(), "MaterialAlpha");
 
 	//	texture
-	char sz
+	//char sz
 
 	//	vertex
 	m_pVB = Gfx_CreateVertexBuffer<SRNormalTextureVertex>(6);

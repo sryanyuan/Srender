@@ -63,7 +63,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="Srender_SD.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="..\..\..\Srender\Debug\;&quot;$(DXSDK_DIR)\Lib\x86&quot;"
+				AdditionalLibraryDirectories="..\..\..\Srender\Debug;&quot;$(DXSDK_DIR)\Lib\x86&quot;;..\..\..\Srender\libs"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"

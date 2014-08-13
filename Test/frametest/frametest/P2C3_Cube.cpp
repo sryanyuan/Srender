@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include <core/RenderApp.h>
+#include <core/SRRenderApp.h>
 #include "P2C3_Cube.h"
 #include "AppTemplate.h"
 //////////////////////////////////////////////////////////////////////////
