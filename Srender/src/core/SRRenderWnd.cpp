@@ -1,6 +1,7 @@
 #include <core/SRRenderWnd.h>
 #include <core/SRRenderApp.h>
 #include <util/debug.h>
+#include <util/SRLogger.h>
 //////////////////////////////////////////////////////////////////////////
 #ifndef GET_X_LPARAM
 #define GET_X_LPARAM(lp)                        ((int)(short)LOWORD(lp))
@@ -61,9 +62,12 @@ bool SRRenderWnd::Create(const char* _pszWndTitle, int _nWndWidth, int _nWndHeig
 		if( dwError != ERROR_CLASS_ALREADY_EXISTS )
 		{
 			MSGBOX_ERR( "RegisterClass failed");
+			LOG(ERROR) << "RegisterClass failed";
 			return false;
 		}
 	}
+
+	LOG(INFO) << "Main render window created.";
 
 	int nScreenWidth = GetSystemMetrics(SM_CXSCREEN);
 	int nScreenHeight = GetSystemMetrics(SM_CYSCREEN);
@@ -105,6 +109,7 @@ HRESULT SRRenderWnd::InitD3D9()
 	if(NULL == pD3D9)
 	{
 		MSGBOX_ERR("Direct3DCreate9 failed");
+		LOG(ERROR) << "Direct3DCreate9 failed";
 		return S_FALSE;
 	}
 
@@ -143,12 +148,15 @@ HRESULT SRRenderWnd::InitD3D9()
 	{
 		if(FAILED(hr))
 		{
+			LOG(WARNING) << "Not support D3DFMT_D24S8 stencil format, trying to use D3DFMT_D16";
+
 			ddpm.AutoDepthStencilFormat = D3DFMT_D16;
 
 			hr = pD3D9->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, m_hWnd, nVertexProcessing, &ddpm, &m_pD3Dev9);
 
 			if(FAILED(hr))
 			{
+				LOG(ERROR) << "IDirect3D9::CreateDevice failed";
 				MSGBOX_ERR("IDirect3D9::CreateDevice failed");
 				break;
 			}
@@ -211,6 +219,7 @@ bool SRRenderWnd::OnDestroy(LRESULT& _lRet)
 	if(SRRenderApp::GetInstancePtr()->GetRenderWnd() == this)
 	{
 		SRRenderApp::GetInstancePtr()->SetRenderWnd(NULL);
+		LOG(INFO) << "Main render window destroyed...";
 	}
 
 	PostQuitMessage(0);

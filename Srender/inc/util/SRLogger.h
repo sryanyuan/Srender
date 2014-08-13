@@ -13,10 +13,10 @@
 	#pragma comment(lib, "libglog_static.lib")
 #endif
 //////////////////////////////////////////////////////////////////////////
-#define SRLOG_INFO			google::GLOG_INFO
-#define SRLOG_WARNING		google::GLOG_WARNING
-#define SRLOG_ERROR			google::GLOG_ERROR
-#define SRLOG_FATAL			google::GLOG_FATAL
+#define SRLOG_INFO			LOG(INFO)
+#define SRLOG_WARNING		LOG(WARNING)
+#define SRLOG_ERROR			LOG(ERROR)
+#define SRLOG_FATAL			LOG(FATAL)
 //////////////////////////////////////////////////////////////////////////
 class SRENDER_API SRLogger
 {
@@ -33,6 +33,7 @@ public:
 
 protected:
 	std::string m_xLogFile;
+	bool m_bInitialized;
 };
 //////////////////////////////////////////////////////////////////////////
 #endif

@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////////
 SRLogger::SRLogger()
 {
-
+	m_bInitialized = false;
 }
 
 SRLogger::~SRLogger()
@@ -26,7 +26,6 @@ bool SRLogger::Initialize(const char* _pszLogFile)
 	char szLogPath[MAX_PATH] = {0};
 	strcpy(szLogPath, _pszLogFile);
 
-	PathRemoveFileSpec(szLogPath);
 	if(!PathFileExists(szLogPath))
 	{
 		if(0 != mkdir(szLogPath))
@@ -38,7 +37,7 @@ bool SRLogger::Initialize(const char* _pszLogFile)
 	char szModuleFileName[MAX_PATH] = {0};
 	GetModuleFileName(NULL, szModuleFileName, sizeof(szModuleFileName));
 	google::InitGoogleLogging(szModuleFileName);
-	google::SetLogDestination(SRLOG_INFO, _pszLogFile);
+	google::SetLogDestination(google::GLOG_INFO, _pszLogFile);
 
 	m_xLogFile = _pszLogFile;
 

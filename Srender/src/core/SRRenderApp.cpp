@@ -22,7 +22,7 @@ SRRenderApp::SRRenderApp()
 	//	initialize the log component
 	char szLogDestination[MAX_PATH] = {0};
 	strcpy(szLogDestination, GetWorkingDir());
-	strcat(szLogDestination, "\\log");
+	strcat(szLogDestination, "\\log\\");
 	SRLogger::GetInstancePtr()->Initialize(szLogDestination);
 }
 
@@ -92,6 +92,8 @@ int SRRenderApp::MsgLoop()
 		return -1;
 	}
 
+	LOG(INFO) << "RenderApp prepared and start...";
+
 	bool bGotMsg = false;
 	MSG  msg;
 	msg.message = WM_NULL;
@@ -157,6 +159,8 @@ int SRRenderApp::MsgLoop()
 			}
 		}
 	}
+
+	LOG(INFO) << "RenderApp end...";
 
 	return (int)msg.wParam;
 }
