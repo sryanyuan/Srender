@@ -199,6 +199,42 @@
 					RelativePath="..\inc\util\debug.h"
 					>
 				</File>
+				<File
+					RelativePath="..\inc\util\SRLogger.h"
+					>
+				</File>
+				<Filter
+					Name="glog"
+					>
+					<File
+						RelativePath="..\inc\util\glog\config.h"
+						>
+					</File>
+					<File
+						RelativePath="..\inc\util\glog\glog\log_severity.h"
+						>
+					</File>
+					<File
+						RelativePath="..\inc\util\glog\glog\logging.h"
+						>
+					</File>
+					<File
+						RelativePath="..\inc\util\glog\port.h"
+						>
+					</File>
+					<File
+						RelativePath="..\inc\util\glog\glog\raw_logging.h"
+						>
+					</File>
+					<File
+						RelativePath="..\inc\util\glog\glog\stl_logging.h"
+						>
+					</File>
+					<File
+						RelativePath="..\inc\util\glog\glog\vlog_is_on.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 		</Filter>
 		<Filter
