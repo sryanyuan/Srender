@@ -44,6 +44,7 @@ bool SRRenderWnd::Create(const char* _pszWndTitle, int _nWndWidth, int _nWndHeig
 	m_rcWnd.right = _nWndWidth;
 	m_rcWnd.bottom = _nWndHeight;
 
+	//	create window
 	WNDCLASS wndClass;
 	wndClass.style = CS_DBLCLKS;
 	wndClass.lpfnWndProc = &_WndProc;
@@ -91,6 +92,12 @@ bool SRRenderWnd::Create(const char* _pszWndTitle, int _nWndWidth, int _nWndHeig
 		return false;
 	}
 
+	//	modify dialog style,disable the maximum button
+	DWORD dwStyle = ::GetWindowLong(m_hWnd, GWL_STYLE);
+	DWORD dwNewStyle = (dwStyle & ~WS_MAXIMIZEBOX);
+	::SetWindowLong(m_hWnd, GWL_STYLE, dwNewStyle);
+
+	//	initialize direct3d9
 	if(S_OK != InitD3D9())
 	{
 		return false;
