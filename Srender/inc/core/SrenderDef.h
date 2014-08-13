@@ -3,11 +3,13 @@
 //////////////////////////////////////////////////////////////////////////
 #include <d3dx9.h>
 #include "SRCLSNameDef.h"
+#include <Shlwapi.h>
 //////////////////////////////////////////////////////////////////////////
 
 #pragma comment(lib, "d3d9.lib")
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "d3dx9.lib")
+#pragma comment(lib, "shlwapi.lib")
 
 #ifdef _SRENDER_EXPORT_
 	#define SRENDER_API	

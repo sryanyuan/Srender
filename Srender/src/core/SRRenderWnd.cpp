@@ -1,5 +1,5 @@
-#include <core/RenderWnd.h>
-#include <core/RenderApp.h>
+#include <core/SRRenderWnd.h>
+#include <core/SRRenderApp.h>
 #include <util/debug.h>
 //////////////////////////////////////////////////////////////////////////
 #ifndef GET_X_LPARAM

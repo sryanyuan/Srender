@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DXSDK_DIR)\Include&quot;;..\inc"
+				AdditionalIncludeDirectories="&quot;$(DXSDK_DIR)\Include&quot;;..\inc;..\inc\util\glog"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -160,15 +160,7 @@
 				Name="core"
 				>
 				<File
-					RelativePath="..\inc\core\MessageListener.h"
-					>
-				</File>
-				<File
-					RelativePath="..\inc\core\RenderApp.h"
-					>
-				</File>
-				<File
-					RelativePath="..\inc\core\RenderWnd.h"
+					RelativePath="..\inc\core\SIMessageListener.h"
 					>
 				</File>
 				<File
@@ -185,6 +177,14 @@
 				</File>
 				<File
 					RelativePath="..\inc\core\SRObject.h"
+					>
+				</File>
+				<File
+					RelativePath="..\inc\core\SRRenderApp.h"
+					>
+				</File>
+				<File
+					RelativePath="..\inc\core\SRRenderWnd.h"
 					>
 				</File>
 				<File
@@ -244,11 +244,15 @@
 				Name="core"
 				>
 				<File
-					RelativePath="..\src\core\RenderApp.cpp"
+					RelativePath="..\src\util\SRLogger.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\src\core\RenderWnd.cpp"
+					RelativePath="..\src\core\SRRenderApp.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\core\SRRenderWnd.cpp"
 					>
 				</File>
 				<File

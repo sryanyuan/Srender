@@ -1,7 +1,8 @@
-#include <core/RenderApp.h>
-#include <core/RenderWnd.h>
+#include <core/SRRenderApp.h>
+#include <core/SRRenderWnd.h>
 #include <algorithm>
 #include <Shlwapi.h>
+#include <util/SRLogger.h>
 //////////////////////////////////////////////////////////////////////////
 #pragma comment(lib, "shlwapi.lib")
 //////////////////////////////////////////////////////////////////////////
@@ -17,11 +18,18 @@ SRRenderApp::SRRenderApp()
 	m_fTimeDelta = 0.0f;
 	m_bTerminate = false;
 	m_nFPS = 0;
+
+	//	initialize the log component
+	char szLogDestination[MAX_PATH] = {0};
+	strcpy(szLogDestination, GetWorkingDir());
+	strcat(szLogDestination, "\\log");
+	SRLogger::GetInstancePtr()->Initialize(szLogDestination);
 }
 
 SRRenderApp::~SRRenderApp()
 {
 	DestroyMsgListener();
+	SRLogger::GetInstancePtr()->UnInitialize();
 }
 
 
