@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\..\Srender\inc;&quot;$(DXSDK_DIR)\Include\&quot;"
+				AdditionalIncludeDirectories="..\..\..\Srender\inc;&quot;$(DXSDK_DIR)\Include\&quot;;..\..\..\SRender\inc\util\glog"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -307,6 +307,14 @@
 			</File>
 			<File
 				RelativePath=".\P2C7_MaterialAlpha.h"
+				>
+			</File>
+			<File
+				RelativePath=".\P2C7_TexAlpha.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\P2C7_TexAlpha.h"
 				>
 			</File>
 		</Filter>
