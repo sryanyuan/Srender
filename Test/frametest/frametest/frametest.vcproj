@@ -317,6 +317,14 @@
 				RelativePath=".\P2C7_TexAlpha.h"
 				>
 			</File>
+			<File
+				RelativePath=".\P2C8_StencilMirror.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\P2C8_StencilMirror.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"

@@ -17,6 +17,7 @@
 #include "P2C6_TexCube.h"
 #include "P2C7_MaterialAlpha.h"
 #include "P2C7_TexAlpha.h"
+#include "P2C8_StencilMirror.h"
 //////////////////////////////////////////////////////////////////////////
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
@@ -44,5 +45,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 	//return MaterialAlphaWnd::AppMain(hInstance);
 
-	return TexAlphaWnd::AppMain(hInstance);
+	//return TexAlphaWnd::AppMain(hInstance);
+
+	return StencilMirrorWnd::AppMain(hInstance);
 }
